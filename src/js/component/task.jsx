@@ -9,7 +9,7 @@ const Task = (props) => {
 
     return(
         <li className="task-line">
-            {props.taskName} <button className="button-close" type="button" onClick={handleClick} id={props.taskIndex} class="btn-close"></button>
+            {props.taskName.label} <button className="button-close" type="button" onClick={handleClick} id={props.taskIndex} class="btn-close"></button>
         </li>
     )
 
