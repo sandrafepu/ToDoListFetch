@@ -1,24 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import TaskList from "./taskList.jsx";
+import Input from "./input.jsx";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
-	return (
+
+	let [taskList, setTaskList] = useState([]);
+
+useEffect(()=>{
+	fetch("https://assets.breatheco.de/apis/fake/todos/user/sfp")
+	.then((response)=>response.json())
+	.then((data)=>{
+		console.log(data)
+       // setTaskList(data);
+      });
+	   }, []);
+
+	 //  fetch('https://assets.breatheco.de/apis/fake/todos/user/sfp', {
+    //  method: "PUT",
+    //  body: JSON.stringify(taskList),
+    //  headers: {
+     //   "Content-Type": "application/json"
+   //   }
+  //  })
+	
+  //  .then(resp => {
+   //     console.log(resp.ok); // will be true if the response is successfull
+    //    console.log(resp.status); // the status code = 200 or code = 400 etc.
+  //  })
+	//.then((data) =>{
+	//	console.log(data)
+//	})
+	//.catch((err) => {
+	//	console.log(err)
+//	})
+
+
+
+	const addTask = (newTask) => {
+		setTaskList([...taskList, newTask])
+	}
+
+	const removeTask = (index) => {
+		taskList.splice(index, 1);
+		setTaskList([...taskList])
+	}
+
+    return (
 		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+			<h1>* To Do List *</h1>
+			<Input addTask={addTask} taskList={taskList}/>
+			<TaskList taskList={taskList} removeTask={removeTask} />
 		</div>
 	);
 };
