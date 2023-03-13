@@ -36,7 +36,7 @@ const Home = () => {
 						}, [taskList]);
 
   const addTask = (newTask) => {
-    setTaskList([...taskList, newTask]);
+    setTaskList([...taskList, {label:newTask, done:false}]);
   };
 
   const removeTask = (index) => {
